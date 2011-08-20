@@ -6,6 +6,19 @@ from django.contrib.auth.models import User
 
 from managers import ProfileManager
 
+
+# Fix for Django's bug regarding not being able to have more than one row with NULL in CharField with unique=True, blank=True, null=True
+# Taken from https://www.maniacmartin.com//2010/12/21/unique-nullable-charfields-django/
+from django.db.models import pre_save
+def cleanup(sender, instance, **kwargs):
+    for mf in instance.meta.fields:
+        if mf.null and mf.blank:
+            f = instance.__getattribute__(mf.name)
+            if f == "":
+                f = None
+pre_save.connect(cleanup)
+
+
 GENDER_CHOICES = (
     ('M', 'Male'),
     ('F', 'Female'),
