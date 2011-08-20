@@ -96,7 +96,7 @@ class ProfileAdmin(FullHistoryAdmin):
         """Creates the Google Apps account for the user
         """
         gam = GoogleAppsManager()
-        password = User.objects.make_random_password(length=6)
+        password = User.objects.make_random_password(length=8, allowed_chars='0123456789')
 
         for profile in queryset:
             accounts_manager.create_account_in_google_apps(request, profile, password)
