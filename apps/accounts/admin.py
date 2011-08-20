@@ -46,7 +46,7 @@ class ProfileAdmin(FullHistoryAdmin):
                    'reservation_category',
                    )
     list_per_page = 20
-    search_fields = ('user__first_name', 
+    search_fields = ('user__first_name',
                      'user__last_name',
                      'user__username',
                      'personal_email_id')
@@ -59,38 +59,38 @@ class ProfileAdmin(FullHistoryAdmin):
                'deactivate_account',
                'reactivate_account',
               ]
-    
-    fieldsets = ((None, 
+
+    fieldsets = ((None,
                   {'fields': ('user', 'course', 'year_of_joining', 'college_email_id',)
                   }
                  ),
-                 ('Personal Details', 
+                 ('Personal Details',
                   {'classes': ('collapse','closed',),
                    'fields': settings.PERSONAL_DETAILS_FIELD_LIST
                   }
-                 ), 
-                 ('Family Details', 
+                 ),
+                 ('Family Details',
                   {'classes': ('collapse','closed',),
                    'fields': settings.FAMILY_DETAILS_FIELD_LIST
                   }
-                 ),                 
-                 ('Contact Details', 
+                 ),
+                 ('Contact Details',
                   {'classes': ('collapse','closed',),
                    'fields': settings.CONTACT_DETAILS_FIELD_LIST
                   }
-                 ),                 
-                 ('Education Details', 
+                 ),
+                 ('Education Details',
                   {'classes': ('collapse','closed',),
                    'fields': settings.EDUCATION_DETAILS_FIELD_LIST
                   }
-                 ),                 
-                 ('Misc Details', 
+                 ),
+                 ('Misc Details',
                   {'classes': ('collapse','closed',),
                    'fields': settings.MISC_DETAILS_FIELD_LIST
                   }
-                 ),                 
+                 ),
                 )
-    
+
 
     def create_accounts_in_google(self, request, queryset):
         """Creates the Google Apps account for the user
@@ -109,9 +109,9 @@ class ProfileAdmin(FullHistoryAdmin):
 
         opts = self.model._meta
         app_label = opts.app_label
-    
-        deletable_objects = [profile for profile in queryset] 
-    
+
+        deletable_objects = [profile for profile in queryset]
+
         # The user has already confirmed the deletion.
         # Do the deletion and return a None to display the change list view again.
         if request.POST.get('post'):
@@ -128,7 +128,7 @@ class ProfileAdmin(FullHistoryAdmin):
                     messages.success(request,
                         'Successfully deleted %s' % profile.register_number)
             return None
-    
+
         context = {
             "title": "Are you sure?",
             "object_name": force_unicode(opts.verbose_name),
@@ -140,11 +140,11 @@ class ProfileAdmin(FullHistoryAdmin):
             "app_label": app_label,
             'action_checkbox_name': helpers.ACTION_CHECKBOX_NAME,
         }
-    
+
         # Display the confirmation page
         return render_to_response('accounts/delete_from_google_apps_confirmation.html',
-                                  context, 
-                                  context_instance=template.RequestContext(request))        
+                                  context,
+                                  context_instance=template.RequestContext(request))
 
 
     def populate_college_email_id(self, request, queryset):
@@ -169,7 +169,7 @@ class ProfileAdmin(FullHistoryAdmin):
 
     def reset_password(self, request, queryset):
         gam = GoogleAppsManager()
-        passwd = User.objects.make_random_password(length=6)
+        passwd = User.objects.make_random_password(length=8, allowed_chars='0123456789')
 
         for profile in queryset:
             if not profile.google_account_created:
@@ -195,10 +195,10 @@ class ProfileAdmin(FullHistoryAdmin):
 
     def mark_as_not_processed(self, request, queryset):
         queryset.update(google_account_created=False)
-        
+
     def deactivate_account(self, request, queryset):
         gam = GoogleAppsManager()
-        
+
         for profile in queryset:
             try:
                 gam.suspend_user(profile.user.username)
@@ -210,11 +210,11 @@ class ProfileAdmin(FullHistoryAdmin):
                     (profile.user.username, e))
             else:
                 messages.success(request,
-                    'Deactivated %s' % profile.user.username)            
-        
+                    'Deactivated %s' % profile.user.username)
+
     def reactivate_account(self, request, queryset):
         gam = GoogleAppsManager()
-        
+
         for profile in queryset:
             try:
                 gam.unsuspend_user(profile.user.username)
@@ -226,7 +226,7 @@ class ProfileAdmin(FullHistoryAdmin):
                     (profile.user.username, e))
             else:
                 messages.success(request,
-                    'Reactivated %s' % profile.user.username)            
+                    'Reactivated %s' % profile.user.username)
 
 
 register(Course, DefaultAdmin)
