@@ -88,6 +88,9 @@ class GoogleAppsManager(object):
         user.login.user_name = renameduser
         self.apps.UpdateUser(username, user)
 
+        # After renaming, Google Apps is putting original username as nickname. We don't want it.
+        self.delete_all_nicknames_for_user(renameduser)
+
         # Never, ever delete an account.
         #self.apps.DeleteUser(renameduser)
 
