@@ -1,3 +1,4 @@
+Revision 124 	 2011-08-20 	 changing passwd in new accounts to use digits only. Easy for students to notedown the new password 
 Revision 123 	 2011-08-20 	 Adding a unique digit after username if unique username is not found 
 Revision 122 	 2011-08-20 	 changing reset_password to use digits only. Easy for students to notedown the new password 
 Revision 121 	 2011-08-11 	 Never delete an account from Google Apps. Just rename it. 
