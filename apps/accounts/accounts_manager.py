@@ -98,6 +98,11 @@ def get_new_username(first_name,
     if is_unique(username):
         return username
 
+    for i in range(1,100):
+        username = first_word_of_first_name + str(i)
+        if is_unique(username):
+            return username
+
 
 def send_introduction_mail(first_name,
                            college_email_id):
