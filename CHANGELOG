@@ -1,3 +1,4 @@
+Revision 127 	 2011-08-20 	 Fix for Django's bug regarding not being able to have more than one row with NULL in CharField with unique=True, blank=True, null=True 
 Revision 126 	 2011-08-20 	 Adding college_email_id to search fileds 
 Revision 125 	 2011-08-20 	 Bumping the number of uwsgi processes to 2 
 Revision 124 	 2011-08-20 	 changing passwd in new accounts to use digits only. Easy for students to notedown the new password 
