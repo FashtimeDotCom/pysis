@@ -49,7 +49,8 @@ class ProfileAdmin(FullHistoryAdmin):
     search_fields = ('user__first_name',
                      'user__last_name',
                      'user__username',
-                     'personal_email_id')
+                     'personal_email_id',
+                     'college_email_id')
     actions = ['create_accounts_in_google',
                'delete_accounts_from_google',
                'populate_college_email_id',
