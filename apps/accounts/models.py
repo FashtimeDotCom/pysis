@@ -11,7 +11,7 @@ from managers import ProfileManager
 # Taken from https://www.maniacmartin.com//2010/12/21/unique-nullable-charfields-django/
 from django.db.models.signals import pre_save
 def cleanup(sender, instance, **kwargs):
-    for mf in instance.meta.fields:
+    for mf in instance._meta.fields:
         if mf.null and mf.blank:
             f = instance.__getattribute__(mf.name)
             if f == "":
