@@ -9,7 +9,7 @@ from managers import ProfileManager
 
 # Fix for Django's bug regarding not being able to have more than one row with NULL in CharField with unique=True, blank=True, null=True
 # Taken from https://www.maniacmartin.com//2010/12/21/unique-nullable-charfields-django/
-from django.db.models import pre_save
+from django.db.models.signals import pre_save
 def cleanup(sender, instance, **kwargs):
     for mf in instance.meta.fields:
         if mf.null and mf.blank:
