@@ -1,3 +1,4 @@
+Revision 132 	 2011-08-20 	 After renaming, Google Apps is putting original username as nickname. We don't want it 
 Revision 131 	 2011-08-20 	 Bumping nginx proxy_read_timeout 
 Revision 130 	 2011-08-20 	 Fix for error in pre_save 
 Revision 129 	 2011-08-20 	 Fixing import pre_save 
