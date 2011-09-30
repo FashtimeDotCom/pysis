@@ -41,14 +41,12 @@ MAIN_MENU_LEFT = [
     ('Attendance', '/attendance/'),
     ('Marks', '/marks/'),
     ('Library', '/library/'),
-    ('Knowledge Base', 'http://kb.rmv.ac.in'),
-    ('Institutional Repository', 'http://ir.rmv.ac.in'),
 ]
 
 MAIN_MENU_RIGHT = [
 
     # (Name, URL)
-    ('Ideas', 'http://www.formspring.me/vidyalaya'),
+    ('Help', 'http://help.srkv.org'),
 ]
 
 MY_PROFILE_MENU = [
